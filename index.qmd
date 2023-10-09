@@ -1,0 +1,9 @@
+# Preface {.unnumbered}
+
+::: {.callout-note style="color: blue;"}
+#### This is work in progress: Just started (about 4%).
+:::
+
+This Quarto book collects my personal notes, trials and exercises of the
+[An Introduction to Bayesian Thinking: A Companion to the Statistics with R Course](https://statswithr.github.io/book/index.html) by Merlise Clyde, Mine Çetinkaya-Rundel
+, Colin Rundel, David Banks, Christine Chai and Lizzy Huang.

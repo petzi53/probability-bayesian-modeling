@@ -1,0 +1,58 @@
+project:
+  type: book
+
+book:
+  title: "Probability & Bayesian Modeling"
+  author: "Peter Baumgartner"
+  date: last-modified
+  date-format: YYYY-MM-DD HH:mm
+  favicon: "img/apple-touch-icon.png"
+
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - 95-references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    css:
+     - quarto.css
+     - glossary.css
+    number-sections: true
+    toc-depth: 5
+    toc-expand: 2
+    code-fold: false
+    code-tools: true
+    code-link: true
+    code-overflow: scroll
+    df-print: default
+
+knitr:
+  opts_chunk:
+    comment: "#>"
+    R.options:
+      knitr.graphics.auto_pdf: true
+
+editor: visual
+
+execute:
+    freeze: auto
+
+language:
+   crossref-fig-title: "Picture"
+   crossref-prp-title: "Callout"
+   crossref-lem-title: "Solution"
+
+crossref:
+  appendix-title: "Appendix"
+  appendix-delim: ":"
+
+# https://github.com/quarto-dev/quarto-cli/blob/main/src/resources/language/_language.yml
+callout-tip-title: "Tip"              # green
+callout-note-title: "Note"            # blue
+callout-warning-title: "Wach out!"    # orange
+callout-important-title: "Procedure"  # red
+callout-caution-title: "TODO"         # yellow
