@@ -6,11 +6,11 @@ book:
   author: "Peter Baumgartner"
   date: last-modified
   date-format: YYYY-MM-DD HH:mm
-  favicon: "img/apple-touch-icon.png"
+  favicon: "img/favicon.ico"
 
   chapters:
     - index.qmd
-    - 01-intro.qmd
+    - 01-probability-uncertainty.qmd
     - 95-references.qmd
 
 bibliography: references.bib
@@ -41,18 +41,21 @@ editor: visual
 execute:
     freeze: auto
 
+crossref:
+  appendix-title: "Appendix"
+  appendix-delim: ":"
+
+
 language:
    crossref-fig-title: "Picture"
    crossref-prp-title: "Callout"
    crossref-lem-title: "Solution"
 
-crossref:
-  appendix-title: "Appendix"
-  appendix-delim: ":"
-
 # https://github.com/quarto-dev/quarto-cli/blob/main/src/resources/language/_language.yml
-callout-tip-title: "Tip"              # green
-callout-note-title: "Note"            # blue
-callout-warning-title: "Wach out!"    # orange
-callout-important-title: "Procedure"  # red
-callout-caution-title: "TODO"         # yellow
+
+   callout-tip-title: "Tip"              # green
+   callout-note-title: "Note"            # blue
+   callout-warning-title: "Wach out!"    # orange
+   callout-important-title: "Procedure"  # red
+   callout-caution-title: "TODO"         # yellow
+

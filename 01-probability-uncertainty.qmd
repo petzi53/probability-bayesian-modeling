@@ -1,0 +1,115 @@
+---
+engine: knitr
+---
+
+# Probability: A Meassure of Uncertainty
+
+## Introduction
+
+:::: {#def-probability}
+
+“A probability is simply a number between 0 and 1 that measures the uncertainty of a particular event.” ([Albert and Hu, 2019, p. 17](zotero://select/library/items/4SLDPG2F)) ([pdf](zotero://open-pdf/library/items/3GC49KRG?page=17&annotation=C4NUBML3))
+
+::::
+
+## Classical View of a Probability
+
+Only applicable when the outcomes are equally likely.
+
+:::::{.example}
+:::{.example-header}
+Classical View: What is the probability of rolling doubles with two dice?
+:::
+::::{.example-container}
+There are $6 \times 6 = 36$ equally likely ways of rolling two distinguishable dice and there are exactly six ways of rolling doubles. So using the classical viewpoint, the probability of doubles is $\frac{6}{36} = \frac{1}{6} = 0.1666667$.
+::::
+:::::
+
+## Frequency View of a Probability
+
+Applicable when it is possible to repeat the random experiment many times under the same conditions.
+
+:::::{.example}
+:::{.example-header}
+Frequency View: What is the probability of rolling doubles with two dice?
+:::
+::::{.example-container}
+Imagine rolling two dice many times under similar conditions. Each time two dice are rolled, we observe whether the result are doubles or not. Then the probability of doubles is approximated by the relative frequency
+
+$$Prob(doubles) \approx \frac{\text{number of doubles}}{\text{number of experiments}}$$
+
+
+
+```{r}
+#| label: rolling-two-dice-pb
+#| attr-source: '#lst-rolling-two-dice-pb lst-cap="Rolling two dice: pb"'
+
+set.seed(42)
+n = 1e5
+
+two_rolls <- function(){
+    sample(1:6, size = 2, replace = TRUE)
+ }
+
+d <-  
+    tibble::as_tibble(t(replicate(n, two_rolls())), .name_repair = "unique") |> 
+    dplyr::rename(Die1 = ...1, Die2 = ...2) |> 
+    dplyr::mutate(Match = ifelse(Die1 == Die2, T, F))
+
+```
+
+```{r}
+#| label: result-two-dice-pb
+#| attr-source: '#lst-result-two-dice-pb lst-cap="Show the simulation result of rolling two dice: pb"'
+
+str(d)
+```
+
+
+
+The empirical probability of rolling doubles in `r n` throws is `r sum(d$Match) / nrow(d)`. In contrast: The analytical probability of rolling doubles is 1/6 = `r 1/6`.
+
+
+::::
+:::::
+
+## The Subjective View of a Probability
+
+
+> “What if one can’t apply these two interpretations of probability? That is, what if the outcomes of the experiment are not equally likely, and it is not feasible or possible to repeat the experiment many times under similar conditions?” ([Albert and Hu, 2019, p. 23f](zotero://select/library/items/4SLDPG2F)) ([pdf](zotero://open-pdf/library/items/3GC49KRG?page=23&annotation=IWSLCY7Q))
+
+::: {.callout-note}
+1. A subjective probability is personal. 
+2. A subjective probability depends on one’s current information or knowledge about the event in question. ([Albert and Hu, 2019, p. 25](zotero://select/library/items/4SLDPG2F)) ([pdf](zotero://open-pdf/library/items/3GC49KRG?page=25&annotation=CCBWWG3E))
+:::
+
+:::::{.example}
+:::{.example-header}
+Measuring probabilities subjectively: Calibration
+:::
+::::{.example-container}
+Calibrate your subjective believe with an experiment where the probabilities of the outcome are clear, e.g., drawing a certain amounts of red/black balls hidden in a box when you know the general red/black distribution. Compare your bet (feelings) with the balls against the other (really) interesting probability (e.g., Trump will win the next election). Change the ball distribution accordingly so that your bets are getting more precise and compare again with your case you are interested in.
+::::
+:::::
+
+## The Sample Space
+
+::: {#def-sample-space}
+
+“The collection of all outcomes that are possible is the sample space.” ([Albert and Hu, 2019, p. 27](zotero://select/library/items/4SLDPG2F)) ([pdf](zotero://open-pdf/library/items/3GC49KRG?page=27&annotation=JQAMUWPS))
+:::
+
+
+```{r}
+#| label: two-dice-alike
+#| attr-source: '#lst-two-dice-alike lst-cap="Roll two fair, indistinguishable dice"'
+t(gtools::combinations(6, 2, repeats.allowed = TRUE))
+```
+
+
+```{r}
+#| label: two-dice-different
+#| attr-source: '#lst-two-dice-different lst-cap="Roll two fair, distinguishable dice"'
+t(gtools::permutations(6, 2, repeats.allowed = TRUE))
+```
+

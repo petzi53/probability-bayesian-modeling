@@ -17,7 +17,7 @@
 }
 
 .resources-header {
-  margin-left: 0em;
+  margin-left: 0;
   padding-left:  60px;
   padding-top:  5px;
   padding-bottom: 0.1em;
@@ -29,10 +29,43 @@
   background-size: 40px;
   background-repeat: no-repeat;
   background-position: 15px center;
-  background-image: url("img/icons8-books-emoji-48.png");
+  background-image: url("img/icons8/books-48.png");
 }
 
 .resources-container {
+  padding-top: 5px;
+  padding-left: 10px;
+  color: black;
+  background-color: white;
+  border-bottom-right-radius: 10px;
+}
+
+
+
+.example {
+  margin: 1em 0;
+  border: 2px solid gray;
+  border-left: 10px solid #36648B;
+  border-radius: 10px;
+}
+
+.example-header {
+  margin-left: 0;
+  padding-left:  60px;
+  padding-top:  5px;
+  padding-bottom: 0.1em;
+  color: white;
+  background-color: #5CACEE;
+  border-top-right-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-image: url("img/icons8/pencil-40.png");
+}
+
+.example-container {
   padding-top: 5px;
   padding-left: 10px;
   color: black;
