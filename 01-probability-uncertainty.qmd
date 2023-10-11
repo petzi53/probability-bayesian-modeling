@@ -1,7 +1,3 @@
----
-engine: knitr
----
-
 # Probability: A Meassure of Uncertainty
 
 ## Introduction
@@ -15,6 +11,8 @@ engine: knitr
 ## Classical View of a Probability
 
 Only applicable when the outcomes are equally likely.
+
+$$Prob(Outcome) = \frac{1}{\text{Number of outcomes}}$$ {#eq-classic-view}
 
 :::::{.example}
 :::{.example-header}
@@ -100,16 +98,235 @@ Calibrate your subjective believe with an experiment where the probabilities of 
 :::
 
 
+
+:::::{.r-code}
+:::{.r-code-header}
+Roll two fair dice
+:::
+::::{.r-code-container}
+
 ```{r}
 #| label: two-dice-alike
-#| attr-source: '#lst-two-dice-alike lst-cap="Roll two fair, indistinguishable dice"'
+#| attr-source: '#lst-two-dice-alike lst-cap="Indistinguishable dice: Order does not matter = Combination"'
 t(gtools::combinations(6, 2, repeats.allowed = TRUE))
 ```
 
 
 ```{r}
 #| label: two-dice-different
-#| attr-source: '#lst-two-dice-different lst-cap="Roll two fair, distinguishable dice"'
+#| attr-source: '#lst-two-dice-different lst-cap="Distinguishable dice: Order matters = Permutation"'
 t(gtools::permutations(6, 2, repeats.allowed = TRUE))
 ```
 
+::::
+:::::
+
+
+
+There are three ways to record sample spaces:
+
+- tree diagram
+- table
+- list
+
+“… we cannot say that one sample space is better than another sample space. We will see that in particular situations some sample spaces are more convenient than other sample spaces when one wishes to assign probabilities.” ([Albert and Hu, 2019, p. 31](zotero://select/library/items/4SLDPG2F)) ([pdf](zotero://open-pdf/library/items/3GC49KRG?page=31&annotation=8STVQY29))
+
+## Assigning Probabilities
+
+::: {.callout-important}
+1. For a random experiment list at first all possible outcomes.
+2. Then assign numbers (probabilities) to the different outcomes that reflect the `r glossary("likelihood", "likelihoods")` that these outcomes can occur.
+:::
+
+The book explains the three different types of assigning probabilities with a girl choosing a dip of ice cream from four different flavors:
+
+1. **Classical view**: Each probability is the same (= $\frac{1}{4}$). The girl chooses randomly from prepared paper clips.
+2. **Subjective view**: The girl has different personal preferences, for instance it likes chocolate the most, vanilla the least etc.
+3. **Frequency view**: Her selection was estimated by the pbserved preferences of 50 previous customers.
+
+## Event and Events Operation
+
+> “One defines probability as a function on events that satisfies three basic laws or axioms.” ([Albert and Hu, 2019, p. 35](zotero://select/library/items/4SLDPG2F)) ([pdf](zotero://open-pdf/library/items/3GC49KRG?page=35&annotation=UJ7BF49J))
+
+
+1. **Intersection**: $A \cap B$ is the event that both A and B occur.
+2. **Union**: $A \cup B$ is the event that either A or B occur.
+3. **Complement**: $\overline{A}$ or $A^{c}$ is the event that A does not occur.
+
+## The Treee Probability Axioms
+
+- **Axiom 1**: For any event A, $P(A) ≥ 0$. That is, all probabilities are non-negative values.
+- **Axiom 2**: $P(S) = 1$. That is, the probability that you observe something in the sample space is one.
+- **Axiom 3**: Suppose one has a sequence of events $A_{1}, A_{2}, A_{3},…$ that are mutually exclusive, which means that for any two events in the sequence, say $A_{2}$ and $A_{3}$, the intersection of the two events is the empty set (i.e. $A_{2} \cap A_{3} = 0$). Then one finds the probability of the union of the events by adding the individual event probabilities:
+
+
+$$P(A_{1} \cup A_{2} \cup A_{3}…) = P(A_{1}) + P(A_{2}) + P(A_{3}) + …$$ {#eq-axiom3}
+
+## The Complement and Addition Properties
+
+**Complement Property**: 
+
+$$P(\overline{A}) = 1 - P(A)$$ {#eq-complement}
+
+**Addition Property**: 
+
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$ {#eq-addition}
+
+
+## Exercises
+
+::: {.callout-warning}
+Please keep in mind that I am a learner! There is no guarantee that my answers are correct.
+:::
+
+### Probability Viewpoints 1
+
+In the following problems, indicate if the given probability is found using the classical viewpoint, the frequency viewpoint, or the subjective viewpoint.
+
+(a) Joe is doing well in school this semester – he is 90% sure that will receive As in all his classes. SUBJECTIVE
+
+(b) Two hundred raffle tickets are sold and one ticket is a winner. Someone purchased one ticket and the probability that her ticket is the winner is 1/200. CLASSICAL
+
+(c) Suppose that 30% of all college women are playing an intercollegiate sport. If we contact one college woman at random, the chance that she plays a sport is 0.3.  CLASSICAL
+
+(d) Two Polish statisticians in 2002 were questioning if the new Belgium Euro coin was indeed fair. They had their students flip the Belgium Euro 250 times, and 140 came up heads. FREQUENCY
+
+(e) Many people are afraid of flying. But over the decade 1987-96, the death risk per flight on a US domestic jet has been 1 in 7 million. FREQUENCY
+
+(f) In a roulette wheel, there are 38 slots numbered 0, 00, 1, …, 36. There are 18 ways of spinning an odd number, so the probability of spinning an odd is 18/38. CLASSICAL
+
+### Probability Viewpoints 2
+
+In the following problems, indicate if the given probability is found using the classical viewpoint, the frequency viewpoint, or the subjective viewpoint.
+
+(a) The probability that the spinner lands in the region A is 1/4. CLASSICAL
+
+(b) The meteorologist states that the probability of rain tomorrow is 0.5. You think it is more likely to rain and you think the chance of rain is 3/4. SUBJECTIVE
+
+![](img/fig1_4.jpg){#fig1_4 
+fig-alt="Circle with 1/4 sector A at the top = clockhand 12 and 3" fig-align="center" 
+width="10%"}
+
+(c) A football fan is 100% certain that his high school football team will win their game on Friday. SUBJECTIVE
+
+(d) Jennifer attends a party, where a prize is given to the person holding a raffle ticket with a specific number. If there are eight people at the party, the chance that Jennifer wins the prize is 1/8. CLASSICAL
+
+(e) What is the chance that you will pass an English class? You learn that the professor passes 70% of the students and you think you are typical in ability among those attending the class. FREQUENCY
+
+(f) If you toss a plastic cup in the air, what is the probability that it lands with the open side up? You toss the cup 50 times and it lands open side up 32 times, so you approximate the probability by 32/50 FREQUENCY
+
+### Equally Likely Outcomes 1
+
+For the following experiments, a list of possible outcomes is given. Decide if one can assume that the outcomes are equally likely. If the equally likely assumption is not appropriate, explain which outcomes are more likely than others.
+
+(a) A bowl contains six marbles of which two are red, three are white, and one is black. One marble is selected at random from the bowl and the color is observed. Outcomes: {red, white, black}
+
+:::::{.my-solution}
+:::{.my-solution-header}
+Solution: Selecting Marble
+:::
+::::{.my-solution-container}
+**Not Equally Likely Outcomes**: There are different probabilities for the three colors at the start condition: 
+
+- red: $\frac{2}{6}$
+- white: $\frac{3}{6}$
+- black: $\frac{1}{6}$
+
+After marbles are drawn the probabilities are changing, because there is no replacement. So this is also not a binomial experiment, as explained in @chap-4-binomial-probabilities.
+
+
+::::
+:::::
+
+
+(b) You observe the gender of a baby born today at your local hospital. Outcomes: {male, female} **Equally Likely Outcomes**
+
+(c) Your school’s football team is playing the top rated school in the country. Outcomes: {your team wins, your team loses} **Not Equally Likely Outcomes**: My team wins, because we are the top rated school in the country.
+
+(d) A bag contains 50 slips of paper, Ten slips are assigned to each category numbered 1 through 5. You choose a slip at random from the bag and notice the number on the slip. Outcomes: {1, 2, 3, 4, 5} **Equally Likely Outcomes**
+
+### Equally Likely Outcomes 2
+
+For the following experiments, a list of possible outcomes is given. Decide if one can assume that the outcomes are equally likely. If the equally likely assumption is not appropriate, explain which outcomes are more likely than others.
+
+(a) You wait at a bus stop for a bus. From experience, you know that you wait, on average, 8 minutes for this bus to arrive. Outcomes: {wait less than 10 minutes, wait more than 10 minutes} **Not Equally Likely Outcomes**
+
+(b) You roll two dice and observe the sum of the numbers. Outcomes: {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12} **Equally Likely Outcomes**
+
+(c) You get a grade for an English course in college. Outcomes: {A, B, C, D, F} **Not Equally Likely Outcomes**: Depends on my course work.
+
+(d) You interview a person at random at your college and ask for his or her age. Outcomes: {17 to 20 years, 21 to 25 years, over 25 years} **Not Equally Likely Outcomes**:  Age groups different large, [different distribution of ages of students enrolled in colleges](https://www.statista.com/statistics/236093/higher-education-enrollment-rates-by-age-group-us/)
+
+### Flipping a Coin
+
+Suppose you flip a fair coin until you observe heads. You repeat this experiment many times, keeping track of the number of flips it takes to observe heads. Here are the numbers of flips for 30 experiments.
+
+```{r}
+x1 <- c(1,3,1,2,1,1,2,6,1,2,1,1,1,1,3,2,1,1,2,1,5,2,1,7,3,3,3,1,2,3)
+
+sum(x1 == 2)
+sum(x1 > 2)
+median(x1)
+```
+
+(a) Approximate the probability that it takes you exactly two flips to observe heads. **$\frac{7}{30} = 0.2333333$**
+
+(b) Approximate the probability that it takes more than two flips to observe heads. **$\frac{9}{30} = 0.3$**
+
+(c) What is the most likely number of flips? **Median = 2**
+
+
+### Driving to Work
+
+You drive to work 20 days, keeping track of the commuting time (in minutes) for each trip. Here are the twenty measurements.
+
+```{r}
+#| results: hold
+x2 <- c(25.4, 27.8, 26.8, 24.1, 24.5, 23.0, 27.5, 24.3, 28.4, 29.0, 29.4, 24.9, 26.3, 23.5, 28.3, 27.8, 29.4, 25.7, 24.3, 24.2)
+
+sum(x2 < 25.0)
+sum(x2 >= 25.0 & x2 <= 28.0)
+```
+
+(a) Approximate the probability that it takes you under 25 minutes to drive to work. **$\frac{8}{20} = \frac{2}{5} = 0.4$**
+
+(b) Approximate the probability it takes between 25 and 28 minutes to drive to work. **$\frac{7}{20}  0.35$**
+
+(c) Suppose one day it takes you 23 minutes to get to work. Would you consider this unusual? Why? **Yes, it is unusual because it happened only once in 20 days = 0.05**
+
+### A Person Sent to Mars
+
+Consider your subjective probability P(M) where M is the event that the United States will send a person to Mars in the next twenty years.
+
+(a) Let B denote the event that you select a red ball from a box of five red and five white balls. Consider the two bets
+
+    • **BET 1** – If M occurs (United States will send a person to Mars in the next 20 years), you win $100. Otherwise, you win nothing.
+
+    • BET 2 – If B occurs (you observe a red ball in the above experiment), you win $100. Otherwise, you win nothing.
+
+Assign bold to the bet that you prefer.
+
+(b) Let B represent choosing red from a box of 7 red and 3 white balls. Again compare **BET 1** with BET 2 – which bet do you prefer?
+
+(c) Let B represent choosing red from a box of 3 red and 7 white balls. Again compare **BET 1** with BET 2 – which bet do you prefer?
+
+(d) Based on your answers to (a), (b), (c), circle the interval of values that contain your subjective probability P(M). **50%-70%**
+
+
+### In What State Will You Live in the Future?
+
+Consider your subjective probability P(S) where S is the event that at age 60 you will be living in the same state as you currently live.
+
+(a) Let B denote the event that you select a red ball from a box of five red and five white balls. Consider the two bets
+
+    • **BET 1** – If S occurs (you live in the same state at age ~~60~~ 80), you win $100. Otherwise, you win nothing.
+
+    • BET 2 – If B occurs (you observe a red ball in the above experiment), you win $100. Otherwise, you win nothing.
+
+Assign bold to the bet that you prefer.
+
+(b) Let B represent choosing red from a box of 7 red and 3 white balls. Again compare BET 1 with **BET 2** – which bet do you prefer?
+
+(c) Let B represent choosing red from a box of 3 red and 7 white balls. Again compare **BET 1** with BET 2 – which bet do you prefer?
+
+(d) Based on your answers to (a), (b), (c), circle the interval of values that contain your subjective probability P(S) **30%-50%**
