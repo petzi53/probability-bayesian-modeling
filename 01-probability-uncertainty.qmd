@@ -262,6 +262,7 @@ For the following experiments, a list of possible outcomes is given. Decide if o
 Suppose you flip a fair coin until you observe heads. You repeat this experiment many times, keeping track of the number of flips it takes to observe heads. Here are the numbers of flips for 30 experiments.
 
 ```{r}
+#| results: hold
 x1 <- c(1,3,1,2,1,1,2,6,1,2,1,1,1,1,3,2,1,1,2,1,5,2,1,7,3,3,3,1,2,3)
 
 sum(x1 == 2)
@@ -330,3 +331,117 @@ Assign bold to the bet that you prefer.
 (c) Let B represent choosing red from a box of 3 red and 7 white balls. Again compare **BET 1** with BET 2 – which bet do you prefer?
 
 (d) Based on your answers to (a), (b), (c), circle the interval of values that contain your subjective probability P(S) **30%-50%**
+
+### Frequency of Vowels in Huckleberry Finn
+
+Suppose you choose a page at random from the book *Huckleberry Finn* by Mark Twain and find the first vowel on the page.
+
+(a) If you believe it is equally likely to find any one of the five possible vowels, fill in the probabilities of the vowels below.
+
+| Vowel       | a  | e  | i  | o  | u  |
+|-------------|----|----|----|----|----|
+| Probability | 0.2| 0.2| 0.2| 0.2| 0.2|
+
+
+(b) Based on your knowledge about the relative use of the different vowels, assign probabilities to the vowels.
+
+| Vowel       | a  | e  | i  | o  | u  |
+|-------------|----|----|----|----|----|
+| Probability | 0.3| 0.3|0.15|0.15| 0.1|
+
+(c) Do you think it is appropriate to apply the classical viewpoint to probability in this example? (Compare your answers to parts a and b.) **No, because there is not the same probability for all events given the different empirical distribution of the vowels.**
+
+(d) On each of the first fifty pages of Huckleberry Finn, your author found the first five vowels. Here is a table of frequencies of the five vowels:
+
+| Vowel       | a  | e  | i  | o  | u  |sum
+|-------------|----:|----:|----:|---:|----:|-----:|
+| Frequency   | 61 | 63 | 34 | 70 | 22 |250|
+| Probability |0.244|0.252|0.136|0.280|0.088|1.000|
+
+Use this data to find approximate probabilities for the vowels.
+
+```{r}
+#| results: hold
+f <- c(61, 63, 34, 70, 22)
+f / sum(f)
+sum(0.244, 0.252, 0.136, 0.280, 0.088)
+
+
+```
+
+### Purchasing Boxes of Cereal
+
+Suppose a cereal box contains one of four different posters denoted A, B, C, and D. You purchase four boxes of cereal and you count the number of posters (among A, B, C, D) that you do not have. The possible number of “missing posters” is 0, 1, 2, and 3.
+
+(a) Assign probabilities if you believe the outcomes are equally likely.
+
+| Number of missing posters | 0 | 1 | 2 | 3 |
+|---------------------------|---:|---:|---:|---:|
+|                           |0.25|0.25|0.25|0.25|
+
+(b) Assign probabilities if you believe that the outcomes 0 and 1 are most likely to happen.
+
+| Number of missing posters | 0 | 1 | 2 | 3 |
+|---------------------------|---:|---:|---:|---:|
+|                           |0.35|0.35|0.20|0.10|
+
+(c) Suppose you purchase many groups of four cereals, and for each purchase, you record the number of missing posters. The number of missing posters for 20 purchases is displayed below. For example, in the first purchase, you had 1 missing poster, in the second purchase, you also had 1 missing poster, and so on.
+
+1, 1, 1, 2, 1, 1, 0, 0, 2, 1, 2, 1, 3, 1, 2, 1, 0, 1, 1, 1
+
+```{r}
+miss <-  c(1, 1, 1, 2, 1, 1, 0, 0, 2, 1, 2, 1, 3, 1, 2, 1, 0, 1, 1, 1)
+p0 <- sum(miss == 0) / 20
+p1 <- sum(miss == 1) / 20
+p2 <- sum(miss == 2) / 20
+p3 <- sum(miss == 3) / 20
+
+print(c(p0,p1,p2,p3))
+```
+
+
+Using these data, assign probabilities.
+
+| Number of missing posters | 0 | 1 | 2 | 3 |
+|---------------------------|---:|---:|---:|---:|
+|                           |0.15|0.60|0.20|0.05|
+
+(d) Based on your work in part c, is it reasonable to assume that the four outcomes are equally likely? Why? **Yes, because there is only 25% of a 4 package purchase where more than 1 poster is missing. Also the figures only say how much posters are missing but do not say which kind of poster is missing. Therefore we can assume that -- _if_ there are missing poster -- that these are always different kind of posters.**
+
+### Writing Sample Spaces 1
+
+For the following random experiments, give an appropriate sample space for the random experiment. You can use any method (a list, a tree diagram, a two-way table) to represent the possible outcomes.
+
+(a) You simultaneously toss a coin and roll a die.
+
+
+{1,T}, {2,T}, {3,T}, {4,T}, {5,T}, {6,T}
+{1,H}, {2,H}, {3,H}, {4,H}, {5,H}, {6,H}
+
+(b) Construct a word from the five letters a, a, e, e, s.
+
+```{r}
+(df <-  as.data.frame(
+    gtools::permutations(5, 5, c('a', 'a', 'e', 'e', 's'), 
+                     set = FALSE, repeats.allowed = FALSE)
+    ) |> 
+    dplyr::distinct())
+```
+
+
+(c) Suppose a person lives at point 0 and each second she randomly takes a step to the right or a step to the left. You observe the person’s location after four steps.
+
+```{r}
+t(gtools::permutations(2, 4, c('L', 'R'), set = FALSE, repeats.allowed = TRUE))
+```
+
+
+(d) In the first round of next year’s baseball playoff, the two teams, say the Phillies and the Diamondbacks play in a best-of-five series where the first team to win three games wins the playoff.
+
+(e) A couple decides to have children until a boy is born. **{G, B}**
+
+(f) A roulette game is played with a wheel with 38 slots numbered 0, 00, 1, …, 36. Suppose you place a $10 bet that an even number (not 0) will come up in the wheel. The wheel is spun.
+
+(f) Suppose three batters, Marlon, Jimmy, and Bobby, come to bat during one inning of a baseball game. Each batter can either get a hit, walk, or get out.
+
+
